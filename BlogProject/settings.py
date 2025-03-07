@@ -11,7 +11,7 @@ https://docs.djangoproject.com/en/5.1/ref/settings/
 """
 
 from pathlib import Path
-import os
+from os import path
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
@@ -42,7 +42,7 @@ INSTALLED_APPS = [
     'blog_app.apps.BlogAppConfig',
 
     #
-    'django_cleanup.apps.CleanupConfig',    # Auto Delete the removed database
+    'django_cleanup.apps.CleanupConfig',  # Auto Delete the removed database
 
 ]
 
@@ -82,8 +82,12 @@ WSGI_APPLICATION = 'BlogProject.wsgi.application'
 
 DATABASES = {
     'default': {
-        'ENGINE': 'django.db.backends.sqlite3',
-        'NAME': BASE_DIR / 'db.sqlite3',
+        'ENGINE': 'django.db.backends.postgresql',
+        'NAME': 'mydatabase',  # Replace with your actual database name
+        'USER': 'myuser',  # Replace with your PostgreSQL username
+        'PASSWORD': '0088',  # Replace with your PostgreSQL password
+        'HOST': 'localhost',  # Change if using a remote server
+        'PORT': '5432',  # Default PostgreSQL port
     }
 }
 
@@ -120,11 +124,9 @@ USE_TZ = True
 # https://docs.djangoproject.com/en/5.1/howto/static-files/
 
 STATIC_URL = 'static/'
-STATICFILES_DIRS = [os.path.join(BASE_DIR, 'static')
-
-                    ]
+STATICFILES_DIRS = [path.join(BASE_DIR, 'static')]
 MEDIA_URL = 'media/'
-MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
+MEDIA_ROOT = path.join(BASE_DIR, 'media')
 
 # Default primary key field type
 # https://docs.djangoproject.com/en/5.1/ref/settings/#default-auto-field

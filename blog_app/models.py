@@ -1,9 +1,16 @@
 from django.db import models
+from django.contrib.auth.models import User
 
 
-# Create your models here.
+# Many to One
+# Many to Many
+# One to Many
+# each article has one author
+# User -> DELETE we use on_delete to remove all article of this user
+# we can use set.null for important things
 
 class Article(models.Model):
+    author = models.ForeignKey('auth.User', on_delete=models.SET_NULL, null=True, blank=True)
     title = models.CharField(max_length=100)
     body = models.TextField()
     image = models.ImageField(upload_to='images/articles')
@@ -12,4 +19,3 @@ class Article(models.Model):
 
     def __str__(self):
         return self.title
-
